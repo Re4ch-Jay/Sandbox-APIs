@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API\v1;
 
-use App\Http\Resources\PostResource;
 use App\Models\Post;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -30,6 +31,8 @@ class PostController extends Controller
     {
         $attributes = $request->validated();
 
+        $attributes['user_id'] = auth()->user()->id;
+
         $post = Post::create($attributes);
 
         return new PostResource($post);
@@ -48,7 +51,13 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        
+        $this->authorize('update', $post);
+    
         $attributes = $request->validated();
+
+        $attributes['user_id'] = auth()->user()->id;
+
         $post->update($attributes);
 
         return new PostResource($post);
@@ -59,7 +68,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+        
         $post->delete();
+
         return response()->json(
             [
                 'message' => 'Post has been deleted', 

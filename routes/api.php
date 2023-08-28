@@ -36,9 +36,7 @@ Route::prefix('v1')->group(function () {
      * Authenticated User Route
      */
     Route::middleware(['auth:sanctum'])->group(function () {
-
         Route::post('auth/logout', [AuthenticateController::class, 'destroy'])->name('auth.logout');
-        
         Route::apiResource('posts', PostController::class); 
         Route::prefix('post')->group(function () {
             Route::apiResource('shares', ShareController::class)->except('show'); 
@@ -52,9 +50,8 @@ Route::prefix('v1')->group(function () {
             Route::get('{user}/shares', [UserController::class, 'shares']);
             Route::get('{user}/likes', [UserController::class, 'likes']);
             Route::get('{user}/comments', [UserController::class, 'comments']);
-        });
+        });   
     });
- 
 });
 
 
