@@ -25,6 +25,8 @@ class LikeController extends Controller
     {
         $attributes = $request->validated();
 
+        $attributes['user_id'] = auth()->user()->id;
+
         $like = Like::create($attributes);
 
         return new LikeResource($like);
@@ -51,6 +53,8 @@ class LikeController extends Controller
      */
     public function destroy(Like $like)
     {
+        $this->authorize('delete', $like);
+
         $like->delete();
         return response()->json([
             'message' => 'You have been unlike the post',

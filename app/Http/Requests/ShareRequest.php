@@ -23,7 +23,6 @@ class ShareRequest extends FormRequest
     {
         return [
             'title' => ['nullable'],
-            'user_id' => ['required'],
             'post_id' => ['required'],
         ];
     }

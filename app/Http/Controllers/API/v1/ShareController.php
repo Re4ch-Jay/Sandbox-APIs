@@ -25,6 +25,8 @@ class ShareController extends Controller
     {
         $attributes = $request->validated();
 
+        $attributes['user_id'] = auth()->user()->id;
+
         $share = Share::create($attributes);
 
         return new ShareResource($share);
@@ -43,7 +45,11 @@ class ShareController extends Controller
      */
     public function update(ShareRequest $request, Share $share)
     {
+        $this->authorize('update', $share);
+
         $attributes = $request->validated();
+
+        $attributes['user_id'] = auth()->user()->id;
 
         $share->update($attributes);
 
@@ -55,6 +61,8 @@ class ShareController extends Controller
      */
     public function destroy(Share $share)
     {
+        $this->authorize('delete', $share);
+
         $share->delete();
         return response()->json([
             'message' => 'Share has been deleted',

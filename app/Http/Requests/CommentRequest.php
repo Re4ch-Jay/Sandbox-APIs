@@ -23,7 +23,6 @@ class CommentRequest extends FormRequest
     {
         return [
             'message' => ['required', 'string'],
-            'user_id' => ['required'],
             'post_id' => ['required'],
         ];
     }
