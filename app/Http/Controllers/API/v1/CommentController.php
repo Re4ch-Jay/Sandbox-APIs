@@ -24,6 +24,9 @@ class CommentController extends Controller
     public function store(CommentRequest $request)
     {
         $attributes = $request->validated();
+       
+        $attributes['user_id'] = auth()->user()->id;
+        
         $comment = Comment::create($attributes);
 
         return new CommentResource($comment);
@@ -42,7 +45,11 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, Comment $comment)
     {
+        $this->authorize('update', $comment);
+
         $attributes = $request->validated();
+
+        $attributes['user_id'] = auth()->user()->id;
 
         $comment->update($attributes);
 
@@ -54,6 +61,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        $this->authorize('delete', $comment);
+
         $comment->delete();
 
         return response()->json(

@@ -22,15 +22,22 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'reach',
             'email' => 'reach@example.com',
+            'password' => '12345678'
         ]);
 
-        // \App\Models\Category::create([
-        //     'name' => "Coding",
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'john',
+            'email' => 'john@example.com',
+            'password' => '12345678'
+        ]);
 
-        // \App\Models\Post::factory(10)->create();
+        \App\Models\Category::create([
+            'name' => "Coding",
+        ]);
 
-        // \App\Models\Comment::factory(20)->create();
+        \App\Models\Post::factory(10)->create();
+
+        \App\Models\Comment::factory(20)->create();
 
     }
 }

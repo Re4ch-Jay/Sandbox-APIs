@@ -22,7 +22,7 @@ class ShareResource extends JsonResource
                     'id' => (string)$this->user->id,
                     'name' => $this->user->name,
                 ],
-                'post' => $this->post->id,
+                'post' => (string)$this->post->id,
             ]
         ];
     }
