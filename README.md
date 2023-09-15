@@ -1,5 +1,7 @@
 #### Sandbox API
 
+https://sanbox-api-app-vqxn3.ondigitalocean.app/
+
 Sandbox API is a collection of APIs endpoint similar to any social media or news application like Facebook, Instagram, BBC etc. That have ability to post, comment, like and share with Authentication and Authorization.
 
 > This APIs is only use for testing, education, and demonstration only.
