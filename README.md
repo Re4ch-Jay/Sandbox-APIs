@@ -27,7 +27,7 @@ You can get started with the Sanbox API by forking the Sanbox API collection to 
 ```bash
 
 $ git clone https://github.com/Re4ch-Jay/Sandbox-APIs.git
-$ php artisan install
+$ composer install
 $ cp .env.example .env
 
 // copy .env.example to .env change your configuration
